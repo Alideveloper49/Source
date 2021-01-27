@@ -66,7 +66,7 @@ desired effect
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b> Factory</span>
+      <span class="logo-lg"><b>{{ DB::table('settings')->value('App_name') }}</span>
     </a>
 
     <!-- Header Navbar -->
@@ -87,7 +87,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Ali Ahmed</span>
+              <span class="hidden-xs">{{ auth()->user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -95,7 +95,7 @@ desired effect
                 <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Ali Ahmed - Manager
+                    {{ auth()->user()->name }} - Manager
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -126,7 +126,7 @@ desired effect
           <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Ali Ahmed</p>
+          <p>{{ auth()->user()->name }}</p>
           <!-- Status -->
           <a href="#">Manager</a>
         </div>
@@ -138,17 +138,28 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+        <li class="{{ Request::is('/') ? 'active' : '' }}">
+        <a href="{{ url::to('/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li class="{{ Request::is('Create-Box') ? 'active' : '' }} treeview">
+            <a href="#"><i class="fa fa-archive"></i> <span>Box</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ Request::is('Create-Box') ? 'active' : '' }}"><a href="{{ Route('Create-Box') }}">Add Box</a></li>
+              <li><a href="#">Manage</a></li>
+            </ul>
+          </li>
+        <li class="{{ Request::is('Create-GTP') ? 'active' : '' }} treeview">
+          <a href="#"><i class="fa fa-file-text-o"></i> <span>GOP & GIP</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li class="{{ Request::is('Create-GTP') ? 'active' : '' }}"><a href="{{ Route('Create-GTP') }}">Add GOP & GIP</a></li>
+            <li><a href="#">Manage</a></li>
           </ul>
         </li>
       </ul>
@@ -166,10 +177,10 @@ desired effect
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Creator By Ali Ahmed
+      Creator By {{ DB::table('settings')->value('creator') }}
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; {{ date('Y') }} <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; {{ date('Y') }} <a href="#">{{ DB::table('settings')->value('company_name') }}</a>.</strong> All rights reserved.
   </footer>
 
 

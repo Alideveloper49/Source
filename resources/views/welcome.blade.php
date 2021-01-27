@@ -38,7 +38,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
     @if (Session::has('message'))
-        <div class="alert alert-info">{{ Session::get('message') }}
+        <div class="alert alert-info text-center">{{ Session::get('message') }}
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         </div>
     @endif
