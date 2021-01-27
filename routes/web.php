@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,5 +15,20 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [UserController::class,'login']);
+Route::get('/', function () {
+    if(Auth::check()) {
+        return redirect('/dashboard');
+    } else {
+        return view('welcome');
+    }
+
+})->name('welcome');
 Route::post('login-action',[UserController::class,'action']);
+
+Route::get('logout',[UserController::class,'logout']);
+
+
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::view('/dashboard','Admin.dashboard')->name('dashboard');
+  });

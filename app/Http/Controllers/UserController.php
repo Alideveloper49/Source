@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
@@ -16,6 +17,8 @@ class UserController extends Controller
     {
         return view('welcome');
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -37,9 +40,9 @@ class UserController extends Controller
         $password = $request->password;
 
         if(Auth::attempt(['email' => $email, 'password' => $password])){
-
+            return redirect('dashboard');
         }else{
-            return redirect()->back()->withErrors('Username && Password');
+            return redirect()->back()->withErrors('Username Or Password');
         }
     }
 
@@ -49,9 +52,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function logout()
     {
-        //
+        Auth::logout();
+
+        return redirect('/')
+            ->with('message', 'You have been logged out');
     }
 
     /**
