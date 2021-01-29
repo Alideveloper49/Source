@@ -8,11 +8,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Create Box
-        <small>Meter Your Create Box</small>
+        Edit Box
+        <small>Meter Your Edit Box</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-archive"></i> Create Box</a></li>
+        <li><a href="#"><i class="fa fa-archive"></i> Manage Box</a></li>
+        <li><a href="#"><i class="fa fa-archive"></i> Edit Box</a></li>
         <li class="active">Here</li>
       </ol>
     </section>
@@ -31,22 +32,23 @@
                           <!-- general form elements -->
           <div class="box box-primary">
             <!-- form start -->
-            <form action="{{ Route('Store-Box') }}" method="POST">
+            <form action="{{ Route('Box-Update',$Boxes->id) }}" method="POST">
               @csrf
+
               <div class="box-body">
                 <div class="form-group">
                   <label>Box</label>
-                  <input type="text" class="form-control" placeholder="Enter Box Name" name="name" >
+                  <input type="text" class="form-control" placeholder="Enter Box Name" value="{{ $Boxes->name }}" name="name" >
                 </div>
                 <div class="form-group">
                   <label>Value</label>
-                  <input type="number" class="form-control" name="value" placeholder="Box Value" >
+                  <input type="number" class="form-control" name="value" value="{{ $Boxes->value }}" placeholder="Box Value" >
                 </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary col-xs-12">Create</button>
+                <button type="submit" class="btn btn-primary col-xs-12">Update</button>
               </div>
             </form>
           </div>

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Box;
+use Validator;
 use Illuminate\Http\Request;
-
 class BoxController extends Controller
 {
     /**
@@ -13,7 +14,8 @@ class BoxController extends Controller
      */
     public function index()
     {
-        //
+        $box = Box::paginate(10);
+        return view('Admin.Box.index',compact('box'));
     }
 
     /**
@@ -34,7 +36,27 @@ class BoxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated =  Validator::make($request->all(), [
+            'name' => ['required','unique:boxes,name'],
+            'value' =>  ['required']
+        ]);
+
+        if($validated->fails()) {
+            return redirect()->back()->withErrors($validated->errors());
+        }
+
+        Box::create([
+            'name' => $request->name,
+            'value' => $request->value,
+            'author' => auth()->user()->id
+        ]);
+
+        $notification=array(
+            'message' => 'Enter Box Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()
+            ->with($notification);
     }
 
     /**
@@ -56,7 +78,8 @@ class BoxController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Boxes = Box::findOrFail($id);
+        return view('Admin.Box.edit',compact('Boxes'));
     }
 
     /**
@@ -68,7 +91,26 @@ class BoxController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated =  Validator::make($request->all(), [
+            'name' => ['required'],
+            'value' =>  ['required']
+        ]);
+
+        if($validated->fails()) {
+            return redirect()->back()->withErrors($validated->errors());
+        }
+
+        Box::where('id',$id)
+        ->update([
+            'name' => $request->name,
+            'value' => $request->value,
+        ]);
+        $notification=array(
+            'message' => 'Update Box Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect('/Box-manage')
+            ->with($notification);
     }
 
     /**
@@ -79,6 +121,13 @@ class BoxController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Boxes = Box::findOrFail($id);
+        $Boxes->delete();
+        $notification=array(
+            'message' => 'Delete Box Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()
+            ->with($notification);
     }
 }

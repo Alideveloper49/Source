@@ -19,6 +19,10 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/iCheck/square/blue.css') }}">
 
+  <link rel="stylesheet" href="{{ asset('admin/plugins/notification/css/toastr.css') }}">
+
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -37,11 +41,8 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
-    @if (Session::has('message'))
-        <div class="alert alert-info text-center">{{ Session::get('message') }}
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        </div>
-    @endif
+
+
     @if ($errors->any())
         <div class="alert alert-danger text-center">
             @foreach ($errors->all() as $error)
@@ -80,6 +81,49 @@
 <script src="{{ asset('admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- iCheck -->
 <script src="{{ asset('admin/plugins/iCheck/icheck.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/plugins/notification/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/plugins/notification/toastr.min.js') }}">
+</script>
+<script>
+
+    @if (Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}"
+    switch(type){
+    case 'info':
+
+    toastr.options.timeOut = 10000;
+    toastr.info("{{Session::get('message')}}");
+    var audio = new Audio('{{ asset('admin/plugins/notification/audio/facebook_sound.mp3') }}');
+    audio.play();
+    break;
+    case 'success':
+
+    toastr.options.timeOut = 10000;
+    toastr.success("{{Session::get('message')}}");
+    var audio = new Audio('{{ asset('admin/plugins/notification/audio/facebook_sound.mp3') }}');
+    audio.play();
+
+    break;
+    case 'warning':
+
+    toastr.options.timeOut = 10000;
+    toastr.warning("{{Session::get('message')}}");
+    var audio = new Audio('{{ asset('admin/plugins/notification/audio/facebook_sound.mp3') }}');
+    audio.play();
+
+    break;
+    case 'error':
+
+    toastr.options.timeOut = 10000;
+    toastr.error("{{Session::get('message')}}");
+    var audio = new Audio('{{ asset('admin/plugins/notification/audio/facebook_sound.mp3') }}');
+    audio.play();
+
+    break;
+    }
+    @endif
+</script>
+
 <script>
   $(function () {
     $('input').iCheck({

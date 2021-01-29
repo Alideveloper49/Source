@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image'
     ];
 
     /**
@@ -40,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function boxes()
+    {
+        return $this->hasMany(Box::class);
+    }
 }

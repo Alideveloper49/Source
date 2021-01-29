@@ -55,9 +55,12 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-
+        $notification=array(
+            'message' => 'You have been logged out',
+            'alert-type' => 'info'
+        );
         return redirect('/')
-            ->with('message', 'You have been logged out');
+            ->with($notification);
     }
 
     /**

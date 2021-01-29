@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Factory - @yield('title')</title>
+  <title>{{ DB::table('settings')->value('App_name') }} - @yield('title')</title>
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Tell the browser to be responsive to screen width -->
@@ -23,6 +23,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/skin-blue.min.css') }}">
+
+  <link rel="stylesheet" href="{{ asset('admin/plugins/pace/pace.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/plugins/notification/css/toastr.css') }}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -85,24 +88,24 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+              <img src="{{ asset('image/'.auth()->user()->image) }}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">{{ auth()->user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('image/'.auth()->user()->image) }}" class="img-circle" alt="User Image">
 
                 <p>
                     {{ auth()->user()->name }} - Manager
-                  <small>Member since Nov. 2012</small>
+                  <small>Member since Nov. {{ auth()->user()->created_at->diffForHumans() }}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ Route('Profile') }}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ URL::to('logout') }}" class="btn btn-default btn-flat">Sign out</a>
@@ -123,7 +126,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+          <img src="{{ asset('image/'.auth()->user()->image) }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ auth()->user()->name }}</p>
@@ -140,7 +143,7 @@ desired effect
         <!-- Optionally, you can add icons to the links -->
         <li class="{{ Request::is('/') ? 'active' : '' }}">
         <a href="{{ url::to('/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li class="{{ Request::is('Create-Box') ? 'active' : '' }} treeview">
+        <li class="{{ Request::is('Create-Box') ? 'active' : '' }} {{ Request::is('Box-manage') ? 'active' : '' }} treeview">
             <a href="#"><i class="fa fa-archive"></i> <span>Box</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -148,7 +151,7 @@ desired effect
             </a>
             <ul class="treeview-menu">
               <li class="{{ Request::is('Create-Box') ? 'active' : '' }}"><a href="{{ Route('Create-Box') }}">Add Box</a></li>
-              <li><a href="#">Manage</a></li>
+              <li class="{{ Request::is('Box-manage') ? 'active' : '' }}"><a href="{{ Route('Box-manage') }}">Manage</a></li>
             </ul>
           </li>
         <li class="{{ Request::is('Create-GTP') ? 'active' : '' }} treeview">
@@ -190,9 +193,49 @@ desired effect
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<script type="text/javascript" src="{{ asset('admin/plugins/notification/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/plugins/notification/toastr.min.js') }}"></script>
+<script>
 
+    @if (Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}"
+    switch(type){
+    case 'info':
+
+    toastr.options.timeOut = 10000;
+    toastr.info("{{Session::get('message')}}");
+    var audio = new Audio('{{ asset('admin/plugins/notification/audio/facebook_sound.mp3') }}');
+    audio.play();
+    break;
+    case 'success':
+
+    toastr.options.timeOut = 10000;
+    toastr.success("{{Session::get('message')}}");
+    var audio = new Audio('{{ asset('admin/plugins/notification/audio/facebook_sound.mp3') }}');
+    audio.play();
+
+    break;
+    case 'warning':
+
+    toastr.options.timeOut = 10000;
+    toastr.warning("{{Session::get('message')}}");
+    var audio = new Audio('{{ asset('admin/plugins/notification/audio/facebook_sound.mp3') }}');
+    audio.play();
+
+    break;
+    case 'error':
+
+    toastr.options.timeOut = 10000;
+    toastr.error("{{Session::get('message')}}");
+    var audio = new Audio('{{ asset('admin/plugins/notification/audio/facebook_sound.mp3') }}');
+    audio.play();
+
+    break;
+    }
+    @endif
+</script>
 <!-- REQUIRED JS SCRIPTS -->
-
+<script src="{{ asset('admin/bower_components/PACE/pace.min.js') }}"></script>
 <!-- jQuery 3 -->
 <script src="{{ asset('admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
