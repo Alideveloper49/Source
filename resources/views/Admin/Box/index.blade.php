@@ -49,7 +49,7 @@
                             <td  width="70">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a title="Edit" class="btn btn-xs btn-default edit-row" href="{{ Route('Box-Edit',$boxes->id) }}" >
+                                    <a title="Edit" class="btn btn-xs btn-default edit-row" href="{{ Route('Box-Edit',$boxes->id) }}" onclick="return confirm('Are you sure you want to Edit Box')">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -57,7 +57,7 @@
                                     <form method="POST" action="{{ Route('Box-delete',$boxes->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                    <button type="submit" title="Delete" class="btn btn-xs btn-danger delete-row">
+                                    <button type="submit" title="Delete" class="btn btn-xs btn-danger delete-row"  onclick="return confirm('Are you sure you want to Deleted Box')">
                                     <i class="fa fa-times " aria-hidden="true"></i>
                                     </button>
                                     </form>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Box;
-use Validator;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 class BoxController extends Controller
 {
     /**

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+
 class CustomerController extends Controller
 {
     /**
@@ -39,7 +40,7 @@ class CustomerController extends Controller
         $validated = Validator::make($request->all(),[
             'name' => ['required'],
             'company_name' => ['required'],
-            'phone' => ['required'],
+            'phone' => ['required' , 'min:11','max:11'],
             'address' => ['required']
         ]);
 
@@ -48,7 +49,7 @@ class CustomerController extends Controller
                 'message' => $validated->errors(),
                 'alert-type' => 'warning'
             );
-            return redirect('Profile')
+            return redirect('Create-Customer')
                 ->with($notification);
             //return redirect()->back()->withErrors($validated->errors());
         }
@@ -87,7 +88,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Customers = Customer::findOrFail($id);
+        return view('Admin.Customer.edit',compact('Customers'));
     }
 
     /**
@@ -99,7 +101,33 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = Validator::make($request->all(),[
+            'name' => ['required'],
+            'company_name' => ['required'],
+            'phone' => ['required'],
+            'address' => ['required']
+        ]);
+        if($validated->fails()) {
+            $notification=array(
+                'message' => $validated->errors(),
+                'alert-type' => 'warning'
+            );
+            return redirect('Profile')
+                ->with($notification);
+            //return redirect()->back()->withErrors($validated->errors());
+        }
+        Customer::where('id',$id)->update([
+            'name' => $request->name,
+            'company_name' => $request->company_name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+        $notification=array(
+            'message' => 'Update Customer Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect('/Customer-manage')
+            ->with($notification);
     }
 
     /**
@@ -110,6 +138,13 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Customers = Customer::findOrFail($id);
+        $Customers->delete();
+        $notification=array(
+            'message' => 'Delete Customer Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()
+            ->with($notification);
     }
 }

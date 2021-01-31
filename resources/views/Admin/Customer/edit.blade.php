@@ -1,6 +1,6 @@
 @extends('Admin.layouts.app')
 
-@section('title', 'Create Customer')
+@section('title', 'Edit Customer')
 
 @section('content')
      <!-- Content Wrapper. Contains page content -->
@@ -8,7 +8,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Create Customer & Party
+        Edit Customer & Party
         <small>Meter Your Customer & Party</small>
       </h1>
       <ol class="breadcrumb">
@@ -24,31 +24,31 @@
                           <!-- general form elements -->
           <div class="box box-primary">
             <!-- form start -->
-            <form action="{{ Route('Store-Customer') }}" method="POST">
+            <form action="{{ Route('Customer-Update',$Customers->id) }}" method="POST">
               @csrf
 
               <div class="box-body">
                 <div class="form-group">
                   <label>Name</label>
-                  <input type="text" class="form-control" placeholder="Enter Box Name" name="name" required>
+                  <input type="text" class="form-control" placeholder="Enter Box Name" value="{{ $Customers->name }}" name="name" required>
                 </div>
                 <div class="form-group">
                   <label>Company Name</label>
-                  <input type="text" class="form-control" name="company_name" placeholder="Enter Customer Company Name" required>
+                  <input type="text" class="form-control" name="company_name" value="{{ $Customers->company_name }}" placeholder="Enter Customer Company Name" required>
                 </div>
                 <div class="form-group">
                     <label>Phone</label>
-                    <input type="text" class="form-control" name="phone" data-inputmask='"mask": "(9999) 99-99999"'   required data-mask>
+                    <input type="text" class="form-control" name="phone" value="{{ $Customers->phone }}" placeholder="Enter Phone Number" required>
                   </div>
                   <div class="form-group">
                     <label>Address</label>
-                    <textarea class="form-control" name="address" rows="5" placeholder="Enter Customer Address"></textarea>
+                    <textarea class="form-control" name="address" rows="5" placeholder="Enter Customer Address">{{ $Customers->address }}</textarea>
                   </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary col-xs-12">Create</button>
+                <button type="submit" class="btn btn-primary col-xs-12">Update</button>
               </div>
             </form>
           </div>

@@ -39,11 +39,14 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('Create-Customer',[CustomerController::class,'create'])->name('Create-Customer');// View Customer Form
     Route::post('Store-Customer',[CustomerController::class,'store'])->name('Store-Customer');// Insert Customer
     Route::get('Customer-manage',[CustomerController::class,'index'])->name('Customer-manage');// Index Customer
+    Route::delete('Delete-Customer/{id}',[CustomerController::class,'destroy'])->name('Delete-Customer');// Delete Customer
+    Route::get('Customer-Edit/{id}',[CustomerController::class,'edit'])->name('Customer-Edit');//view Customer Edit
+    Route::post('Customer-Update/{id}',[CustomerController::class,'update'])->name('Customer-Update');
 
     //Profile
     Route::get('Profile',[ProfileController::class,'index'])->name('Profile');// view Profile data
     Route::post('Upload-Image',[ProfileController::class,'upload'])->name('upload-image');// Only Profile Image upload
-    Route::post('Company-Update',[ProfileController::class,'Company_Update'])->name('Company-Update');
+    Route::post('Company-Update',[ProfileController::class,'Company_Update'])->name('Company-Update');// Company Update query
 
     //Box Crud
     Route::get('Create-Box',[BoxController::class,'create'])->name('Create-Box'); // View Form
@@ -51,7 +54,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('Box-manage',[BoxController::class,'index'])->name('Box-manage');// Manage View
     Route::delete('Box-delete/{id}',[BoxController::class,'destroy'])->name('Box-delete'); // Box Delete
     Route::get('Box-Edit/{id}',[BoxController::class,'edit'])->name('Box-Edit');// view Box Edit
-    Route::post('Box-Update/{id}',[BoxController::class,'update'])->name('Box-Update');
+    Route::post('Box-Update/{id}',[BoxController::class,'update'])->name('Box-Update');// view Box Update query
 
     //GTP GIP Crud
     Route::get('Create-GIP',[GIPController::class,'create'])->name('Create-GIP');

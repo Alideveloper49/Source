@@ -8,8 +8,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{ DB::table('settings')->value('App_name') }} - @yield('title')</title>
-<!-- CSRF Token -->
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel = "icon" href = "{{ asset('image/icon.png') }}" type = "image/x-icon">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
@@ -153,7 +154,7 @@ desired effect
             </a>
             <ul class="treeview-menu">
               <li class="{{ Request::is('Create-Box') ? 'active' : '' }}"><a href="{{ Route('Create-Box') }}">Add Box</a></li>
-              <li class="{{ Request::is('Box-manage') ? 'active' : '' }}"><a href="{{ Route('Box-manage') }}">Manage</a></li>
+              <li class="{{ Request::is('Box-manage') ? 'active' : '' }}"><a href="{{ Route('Box-manage') }}">Box Manage</a></li>
             </ul>
           </li>
           <li class="{{ Request::is('Create-Customer') ? 'active' : '' }}  {{ Request::is('Customer-manage') ? 'active' : '' }} treeview">
@@ -247,6 +248,7 @@ desired effect
     }
     @endif
 </script>
+
 <!-- REQUIRED JS SCRIPTS -->
 <script src="{{ asset('admin/bower_components/PACE/pace.min.js') }}"></script>
 <!-- jQuery 3 -->
@@ -255,9 +257,20 @@ desired effect
 <script src="{{ asset('admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
-
+<!-- InputMask -->
+<script src="{{ asset('admin/plugins/input-mask/jquery.inputmask.js') }}"></script>
+<script src="{{ asset('admin/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
+<script src="{{ asset('admin/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+     <script>
+        $(function () {
+
+          $('[data-mask]').inputmask()
+
+
+        });
+      </script>
 </body>
 </html>
