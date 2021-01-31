@@ -1,6 +1,6 @@
 @extends('Admin.layouts.app')
 
-@section('title', 'Create Box')
+@section('title', 'Box Manage')
 
 @section('content')
      <!-- Content Wrapper. Contains page content -->

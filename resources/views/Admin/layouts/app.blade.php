@@ -22,7 +22,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/skin-blue.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/_all-skins.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/skin-black.min.css') }}">
 
   <link rel="stylesheet" href="{{ asset('admin/plugins/pace/pace.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/plugins/notification/css/toastr.css') }}">
@@ -65,9 +66,9 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>A</b>li</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>{{ DB::table('settings')->value('App_name') }}</span>
     </a>
@@ -111,6 +112,7 @@ desired effect
                   <a href="{{ URL::to('logout') }}" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
+
             </ul>
           </li>
         </ul>
@@ -131,7 +133,7 @@ desired effect
         <div class="pull-left info">
           <p>{{ auth()->user()->name }}</p>
           <!-- Status -->
-          <a href="#">Manager</a>
+          <a href="{{ Route('Profile') }}">Manager</a>
         </div>
       </div>
 
@@ -154,14 +156,25 @@ desired effect
               <li class="{{ Request::is('Box-manage') ? 'active' : '' }}"><a href="{{ Route('Box-manage') }}">Manage</a></li>
             </ul>
           </li>
-        <li class="{{ Request::is('Create-GTP') ? 'active' : '' }} treeview">
+          <li class="{{ Request::is('Create-Customer') ? 'active' : '' }}  {{ Request::is('Customer-manage') ? 'active' : '' }} treeview">
+            <a href="#"><i class="fa fa-users"></i> <span>Customer & Party</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="{{ Request::is('Create-Customer') ? 'active' : '' }}"><a href="{{ Route('Create-Customer') }}">Add Customer & Party</a></li>
+              <li class="{{ Request::is('Customer-manage') ? 'active' : '' }}"><a href="{{ Route('Customer-manage') }}">Manage Customer & Party</a></li>
+            </ul>
+          </li>
+        <li class="{{ Request::is('Create-GIP') ? 'active' : '' }} treeview">
           <a href="#"><i class="fa fa-file-text-o"></i> <span>GOP & GIP</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ Request::is('Create-GTP') ? 'active' : '' }}"><a href="{{ Route('Create-GTP') }}">Add GOP & GIP</a></li>
+            <li class="{{ Request::is('Create-GIP') ? 'active' : '' }}"><a href="{{ Route('Create-GIP') }}">Add GOP & GIP</a></li>
             <li><a href="#">Manage</a></li>
           </ul>
         </li>

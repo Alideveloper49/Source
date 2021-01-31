@@ -50,19 +50,21 @@
               <div class="tab-content">
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="Company_Settings">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post" action="{{ Route('Company-Update') }}">
+                      @csrf
+
                         <div class="form-group">
                           <label class="col-sm-2 control-label">Software</label>
 
                           <div class="col-sm-10">
-                            <input type="text" class="form-control"  placeholder="Enter your Software name" value="{{ $settings->App_name }}" required>
+                            <input type="text" class="form-control"  placeholder="Enter your Software name" name="App_name" value="{{ $settings->App_name }}" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label  class="col-sm-2 control-label">Company</label>
 
                           <div class="col-sm-10">
-                            <input type="email" class="form-control"  placeholder="Enter your Company name" value="{{ $settings->Company_name }}" required>
+                            <input type="text" class="form-control"  placeholder="Enter your Company name" name="Company_name" value="{{ $settings->Company_name }}" required>
                           </div>
                         </div>
                         <div class="form-group">
@@ -76,7 +78,7 @@
                         </div>
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-danger">Submit</button>
+                            <button type="submit" class="btn btn-danger">Update Settings </button>
                           </div>
                         </div>
                       </form>
@@ -124,7 +126,7 @@
                     </div>
                     <div class="form-group">
                       <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-danger">Submit</button>
+                        <button type="submit" class="btn btn-danger">Update Profile</button>
                       </div>
                     </div>
                   </form>
@@ -152,7 +154,7 @@
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
+                          <button type="submit" class="btn btn-danger">Update Upload</button>
                         </div>
                       </div>
                     </form>

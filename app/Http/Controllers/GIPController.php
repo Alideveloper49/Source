@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class GTPController extends Controller
+class GIPController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +23,7 @@ class GTPController extends Controller
      */
     public function create()
     {
-        return view('Admin.GTP.create');
+        return view('Admin.GIP.create');
     }
 
     /**

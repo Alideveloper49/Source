@@ -1,6 +1,6 @@
 @extends('Admin.layouts.app')
 
-@section('title', 'Create Box')
+@section('title', 'Box Edit')
 
 @section('content')
      <!-- Content Wrapper. Contains page content -->
@@ -38,11 +38,11 @@
               <div class="box-body">
                 <div class="form-group">
                   <label>Box</label>
-                  <input type="text" class="form-control" placeholder="Enter Box Name" value="{{ $Boxes->name }}" name="name" >
+                  <input type="text" class="form-control" placeholder="Enter Box Name" value="{{ $Boxes->name }}" name="name" required>
                 </div>
                 <div class="form-group">
                   <label>Value</label>
-                  <input type="number" class="form-control" name="value" value="{{ $Boxes->value }}" placeholder="Box Value" >
+                  <input type="number" class="form-control" name="value" value="{{ $Boxes->value }}" placeholder="Box Value" required >
                 </div>
               </div>
               <!-- /.box-body -->

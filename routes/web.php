@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\BoxController;
-use App\Http\Controllers\GTPController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\GIPController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -34,9 +35,15 @@ Route::group(['middleware'=>'auth'],function(){
     //Dashboard
     Route::view('/dashboard','Admin.dashboard')->name('dashboard');
 
+    // Customer
+    Route::get('Create-Customer',[CustomerController::class,'create'])->name('Create-Customer');// View Customer Form
+    Route::post('Store-Customer',[CustomerController::class,'store'])->name('Store-Customer');// Insert Customer
+    Route::get('Customer-manage',[CustomerController::class,'index'])->name('Customer-manage');// Index Customer
+
     //Profile
     Route::get('Profile',[ProfileController::class,'index'])->name('Profile');// view Profile data
-    Route::post('Upload-Image',[ProfileController::class,'upload'])->name('upload-image');
+    Route::post('Upload-Image',[ProfileController::class,'upload'])->name('upload-image');// Only Profile Image upload
+    Route::post('Company-Update',[ProfileController::class,'Company_Update'])->name('Company-Update');
 
     //Box Crud
     Route::get('Create-Box',[BoxController::class,'create'])->name('Create-Box'); // View Form
@@ -47,5 +54,5 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('Box-Update/{id}',[BoxController::class,'update'])->name('Box-Update');
 
     //GTP GIP Crud
-    Route::get('Create-GTP',[GTPController::class,'create'])->name('Create-GTP');
+    Route::get('Create-GIP',[GIPController::class,'create'])->name('Create-GIP');
   });

@@ -1,6 +1,6 @@
 @extends('Admin.layouts.app')
 
-@section('title', 'Create Box')
+@section('title', 'Create Customer')
 
 @section('content')
      <!-- Content Wrapper. Contains page content -->
@@ -8,11 +8,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Create Box
-        <small>Meter Your Create Box</small>
+        Create Customer & Party
+        <small>Meter Your Customer & Party</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-archive"></i> Create Box</a></li>
+        <li><a href="#"><i class="fa fa-users"></i> Customer & Party</a></li>
         <li class="active">Here</li>
       </ol>
     </section>
@@ -21,27 +21,29 @@
     <section class="content container-fluid">
         <div class="row">
             <div class="col-lg-12 col-xs-12 col-md-12">
-                @if ($errors->any())
-                    <div class="alert alert-danger text-center">
-                        @foreach ($errors->all() as $error)
-                            {{ $error }}
-                        @endforeach
-                    </div>
-                @endif
                           <!-- general form elements -->
           <div class="box box-primary">
             <!-- form start -->
-            <form action="{{ Route('Store-Box') }}" method="POST">
+            <form action="{{ Route('Store-Customer') }}" method="POST">
               @csrf
+
               <div class="box-body">
                 <div class="form-group">
-                  <label>Box</label>
+                  <label>Name</label>
                   <input type="text" class="form-control" placeholder="Enter Box Name" name="name" required>
                 </div>
                 <div class="form-group">
-                  <label>Value</label>
-                  <input type="number" class="form-control" name="value" placeholder="Box Value" required>
+                  <label>Company Name</label>
+                  <input type="text" class="form-control" name="company_name" placeholder="Enter Customer Company Name" required>
                 </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="number" class="form-control" name="phone" placeholder="Enter Phone Number" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Address</label>
+                    <textarea class="form-control" name="address" rows="5" placeholder="Enter Customer Address"></textarea>
+                  </div>
               </div>
               <!-- /.box-body -->
 
