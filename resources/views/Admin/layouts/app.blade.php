@@ -29,13 +29,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('admin/plugins/pace/pace.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/plugins/notification/css/toastr.css') }}">
 
+  <link rel="stylesheet" href="{{ asset('admin/bower_components/select2/dist/css/select2.min.css') }}">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-
+  <script src="{{ asset('admin/dist/js/jquery.min.js') }}"></script>
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -169,13 +171,13 @@ desired effect
             </ul>
           </li>
         <li class="{{ Request::is('Create-GIP') ? 'active' : '' }} treeview">
-          <a href="#"><i class="fa fa-file-text-o"></i> <span>GOP & GIP</span>
+          <a href="#"><i class="fa fa-file-text-o"></i> <span>GIP</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ Request::is('Create-GIP') ? 'active' : '' }}"><a href="{{ Route('Create-GIP') }}">Add GOP & GIP</a></li>
+            <li class="{{ Request::is('Create-GIP') ? 'active' : '' }}"><a href="{{ Route('Create-GIP') }}">Add GIP</a></li>
             <li><a href="#">Manage</a></li>
           </ul>
         </li>
@@ -261,12 +263,17 @@ desired effect
 <script src="{{ asset('admin/plugins/input-mask/jquery.inputmask.js') }}"></script>
 <script src="{{ asset('admin/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
 <script src="{{ asset('admin/plugins/input-mask/jquery.inputmask.date.extensions.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ asset('admin/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+<!-- SlimScroll -->
+<script src="{{ asset('admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
      <script>
         $(function () {
-
+        //Initialize Select2 Elements
+        $('.select2').select2()
           $('[data-mask]').inputmask()
 
 

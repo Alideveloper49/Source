@@ -73,6 +73,9 @@
                           </tr>
                           @endforeach
                           @else
+                          <tr>
+                            <td colspan="7" class="text-center" style="font-size:30px;">No Customers Yet</td>
+                          </tr>
                           @endif
                         </table>
                       </div>

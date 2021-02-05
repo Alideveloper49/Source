@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class GIPController extends Controller
@@ -23,7 +24,8 @@ class GIPController extends Controller
      */
     public function create()
     {
-        return view('Admin.GIP.create');
+        $Customer = Customer::orderBy('id','desc')->get();
+        return view('Admin.GIP.create',compact('Customer'));
     }
 
     /**
