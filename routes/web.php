@@ -59,3 +59,5 @@ Route::group(['middleware'=>'auth'],function(){
     //GTP GIP Crud
     Route::get('Create-GIP',[GIPController::class,'create'])->name('Create-GIP');
   });
+  /// Ths sjfklsd fjsal fjklas fljasldk fj;as\
+  ///jsfkl fs fjsklf lasjf lasjfkljas lfjl
