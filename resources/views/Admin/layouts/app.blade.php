@@ -38,9 +38,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <script src="{{ asset('admin/dist/js/jquery.min.js') }}"></script>
+
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <style>
+            .border-green {
+                border-color: green;
+                color: green;
+                }
+
+                .border-red {
+                border-color: red;
+                color: red;
+            }
+            .qty-error{
+                border-color: red;
+                color: red;
+            }
+            .rate-error{
+                border-color: red;
+                color: red;
+            }
+            .product-error{
+                border-color: red;
+                color: red;
+            }
+            .desc-error{
+                border-color: red;
+                color: red;
+            }
+            .type-error{
+                border-color: red;
+                color: red;
+            }
+
+        </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -170,14 +203,14 @@ desired effect
               <li class="{{ Request::is('Customer-manage') ? 'active' : '' }}"><a href="{{ Route('Customer-manage') }}">Manage Customer & Party</a></li>
             </ul>
           </li>
-        <li class="{{ Request::is('Create-GIP') ? 'active' : '' }} treeview">
-          <a href="#"><i class="fa fa-file-text-o"></i> <span>GIP</span>
+        <li class="{{ Request::is('Create-GIP-GOP') ? 'active' : '' }} treeview">
+          <a href="#"><i class="fa fa-file-text-o"></i> <span>GIP && GOP</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ Request::is('Create-GIP') ? 'active' : '' }}"><a href="{{ Route('Create-GIP') }}">Add GIP</a></li>
+            <li class="{{ Request::is('Create-GIP-GOP') ? 'active' : '' }}"><a href="{{ Route('Create-GIP-GOP') }}">Add GIP && GOP</a></li>
             <li><a href="#">Manage</a></li>
           </ul>
         </li>

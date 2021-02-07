@@ -36,17 +36,17 @@
               <div class="box-body">
                 <div class="form-group">
                   <label>Box</label>
-                  <input type="text" class="form-control" placeholder="Enter Box Name" name="name" required>
+                  <input type="text" class="form-control" placeholder="Enter Box Name" name="name" tabindex="1" required>
                 </div>
                 <div class="form-group">
                   <label>Value</label>
-                  <input type="number" class="form-control" name="value" placeholder="Box Value" required>
+                  <input type="number" class="form-control" name="value" placeholder="Box Value" tabindex="2" required>
                 </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary col-xs-12">Create</button>
+                <button type="submit" tabindex="3" class="btn btn-primary col-xs-12">Create</button>
               </div>
             </form>
           </div>
