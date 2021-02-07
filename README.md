@@ -1,4 +1,4 @@
-## <p align="center">Welcome Gate In/Out Pass Software </p>
+## Welcome Gate In/Out Pass Software 
 
 Php version | laravel
 ---------|---------
@@ -20,6 +20,8 @@ clone git project:
 > php artisan migrate
 # Step 6
 > php artisan db:seed
+# Step 7
+> composer require realrashid/sweet-alert
 
 
 
