@@ -14,6 +14,12 @@ clone git project:
 > php artisan key:generate
 # Step 3
 > npm install touch-cli -g
+# Step 4
+> touch database/database.sqlite
+# Step 5
+> php artisan migrate
+# Step 6
+> php artisan db:seed
 
 
 
