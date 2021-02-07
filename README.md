@@ -22,5 +22,5 @@ clone git project:
 > php artisan db:seed
 
 
-# Happing code
+##### Happy coding
 
