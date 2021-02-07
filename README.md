@@ -1,4 +1,4 @@
-## <span style="align:center;">Welcome Gate In/Out Pass Software </span>
+## <p align="center">Welcome Gate In/Out Pass Software </p>
 
 Php version | laravel
 ---------|---------
