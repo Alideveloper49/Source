@@ -18,4 +18,13 @@ class invoice extends Model
         'type',
         'status'
     ];
+
+    public function users()
+    {
+    return $this->belongsTo(User::class,'author');
+    }
+    public function customer_party()
+    {
+    return $this->belongsTo(Customer::class,'party_id');
+    }
 }

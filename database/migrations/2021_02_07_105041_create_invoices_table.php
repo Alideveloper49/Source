@@ -20,7 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('party_id')->nullable();
             $table->integer('amount')->nullable();
             $table->integer('type')->nullable();
-            $table->string('status')->default('Unpaid');
+            $table->string('status')->default('Paid');
             $table->timestamps();
         });
     }

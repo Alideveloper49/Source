@@ -57,7 +57,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('Box-Update/{id}',[BoxController::class,'update'])->name('Box-Update');// view Box Update query
 
     //GTP GIP Crud
-    Route::get('Create-GIP-GOP',[GIPController::class,'create'])->name('Create-GIP-GOP');// GIP && GOP two action
+    Route::get('Create-GIP',[GIPController::class,'create'])->name('Create-GIP');// GIP && GOP two action
     Route::post('Store-GIP',[GIPController::class,'store'])->name('Store-GIP');// action store
     Route::delete('Delete-GTP/{type}/{node}',[GIPController::class,'destroy'])->name('Delete-GTP');// clear node 0 GIP && GOP
+    Route::get('invoice-manage',[GIPController::class,'index'])->name('invoice-manage');
   });

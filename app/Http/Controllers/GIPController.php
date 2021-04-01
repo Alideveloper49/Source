@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Box;
 use App\Models\Customer;
 use App\Models\Gate_pass;
 use App\Models\invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class GIPController extends Controller
 {
@@ -18,7 +18,8 @@ class GIPController extends Controller
      */
     public function index()
     {
-        //
+        $invoice = invoice::orderBy('id','desc')->paginate(2);
+        return view('Admin.GIP.index',compact('invoice'));
     }
 
     /**
@@ -29,11 +30,12 @@ class GIPController extends Controller
     public function create()
     {
         $Customer = Customer::orderBy('id','desc')->get();
+        $box = Box::orderBy('id','desc')->get();
         $gate_pass = Gate_pass::orderBy('id','desc')->where('node','0')->get();
         $amount = Gate_pass::orderBy('id','desc')->where('node','0')->sum("amount");
         $qty = Gate_pass::orderBy('id','desc')->where('node','0')->sum("qty");
 
-        return view('Admin.GIP.create',compact('Customer','gate_pass','amount','qty'));
+        return view('Admin.GIP.create',compact('Customer','gate_pass','amount','qty','box'));
     }
 
     /**
@@ -48,8 +50,7 @@ class GIPController extends Controller
         switch ($request->input('action')) {
             case 'invoice':
                 $validated =  Validator::make($request->all(), [
-                    'customer' => ['required'],
-                    'type2'=> ['required'],
+                    'customer' => ['required']
                 ]);
 
                 if($validated->fails()) {
@@ -81,7 +82,7 @@ class GIPController extends Controller
                 }
 
                 $nextReference = $nextLetters."-".sprintf('%03d', $nextNumbers);
-                $amount_order = Gate_pass::where('type',$request->type2)
+                $amount_order = Gate_pass::where('type','in')
                 ->where('node','0')
                 ->sum('amount');
                 if($amount_order == "0"){
@@ -97,9 +98,9 @@ class GIPController extends Controller
                     'author' => auth()->user()->id,
                     'party_id' => $request->customer,
                     'amount' => $amount_order,
-                    'type' => $request->type2,
+                    'type' => 'in',
                 ]);
-                 Gate_pass::where('type',$request->type2)
+                 Gate_pass::where('type','in')
                 ->where('node','0')
                 ->update([
                     'party_id' => $order_place->party_id,
@@ -120,7 +121,7 @@ class GIPController extends Controller
                 'qty' =>  ['required'],
                 'rate' =>  ['required'],
                 'desc' =>  ['required'],
-                'type' =>  ['required']
+                'unit' =>  ['required']
             ]);
 
             if($validated->fails()) {
@@ -142,7 +143,8 @@ class GIPController extends Controller
                 'rate' => $request->rate,
                 'desc' => $request->desc,
                 'amount' => $amount,
-                'type' => $request->type,
+                'unit' => $request->unit,
+                'type' => 'in',
                 'author' => auth()->user()->id
             ]);
 

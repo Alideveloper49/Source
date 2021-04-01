@@ -21,6 +21,7 @@ class CreateGatePassesTable extends Migration
             $table->string('product')->nullable();
             $table->longText('desc')->nullable();
             $table->integer('qty')->nullable();
+            $table->text('unit')->nullable();
             $table->integer('rate')->nullable();
             $table->integer('amount')->nullable();
             $table->integer('type')->nullable();

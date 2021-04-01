@@ -16,32 +16,32 @@
                     <p class="product-error"></p>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3 ">
                 <div class="form-group">
-                    <label for="Product">Quantity</label>
-                    <input type="text" class="form-control required" tabindex="3" name="qty" id="qty" placeholder="Enter Quantity  " >
-                    <p class="qty-error"></p>
-                </div>
-            </div>
-            <div class="col-md-2 ">
-                <div class="form-group">
-                    <label for="Product">Rate</label>
-                    <input type="text" class="form-control required" tabindex="4" name="rate" id="rate" placeholder="Enter Rate  " >
-                    <p class="rate-error"></p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="Product">Type Pass</label>
-                    <select name="type" id="type" class="form-control required" tabindex="5" >
+                    <label for="Product">Unit</label>
+                    <select name="unit" id="type" class="form-control required" tabindex="3" >
                         <option value="">Select</option>
-                        <option value="in">Gate In Pass</option>
-                        <option value="out">Gate Out Pass</option>
+                        <option value="KG">KG</option>
+                        <option value="Pieces">Pieces</option>
                     </select>
                     <p class="type-error"></p>
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Product">Quantity</label>
+                    <input type="text" class="form-control required" tabindex="4" name="qty" id="qty" placeholder="Enter Quantity  " >
+                    <p class="qty-error"></p>
+                </div>
+            </div>
 
+            <div class="col-md-3 ">
+                <div class="form-group">
+                    <label for="Product">Rate</label>
+                    <input type="text" class="form-control required" tabindex="5" name="rate" id="rate" placeholder="Enter Rate  " >
+                    <p class="rate-error"></p>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -110,21 +110,22 @@
       $("#qty").addClass("border-red");
       $("#qty").removeClass("border-green");
       qty = "";
-    } else if (num.test(qty)) {
+    } else  {
       $(".qty-error").html("");
       $("#qty").addClass("border-green");
       $("#submit").css({ "pointer-events": "", "cursor": "", "color": "", "background-color": "", "border": "", "text-shadow": "" });
       $("#qty").removeClass("border-red");
       qty = qty;
-    } else {
-      $(".qty-error").html("Integer is not Allowed!");
-      $("#qty").addClass("border-red");
-      $("#submit").css({ "pointer-events": "none", "cursor": "not-allowed", "color": "black", "background-color": "#ccc", "border": "solid 1px #888", "text-shadow": "1px 1px 1px #fff" });
-      $("#qty").removeClass("border-green");
-      qty = "";
     }
+    // else {
+    //   $(".qty-error").html("Integer is not Allowed!");
+    //   $("#qty").addClass("border-red");
+    //   $("#submit").css({ "pointer-events": "none", "cursor": "not-allowed", "color": "black", "background-color": "#ccc", "border": "solid 1px #888", "text-shadow": "1px 1px 1px #fff" });
+    //   $("#qty").removeClass("border-green");
+    //   qty = "";
+   // }
   })
-
+  var rate_check = "^(?=.*?[1-9])[0-9()-]+$";
   $("#rate").keyup(function () {
     var rate = $.trim($("#rate").val());
 
@@ -133,24 +134,26 @@
       $("#rate").addClass("border-red");
       $("#rate").removeClass("border-green");
       rate = "";
-    } else if (num.test(rate)) {
+    }
+    else   {
       $(".rate-error").html("");
       $("#rate").addClass("border-green");
       $("#submit").css({ "pointer-events": "", "cursor": "", "color": "", "background-color": "", "border": "", "text-shadow": "" });
       $("#rate").removeClass("border-red");
       rate = rate;
-    } else {
-      $(".rate-error").html("Integer is not Allowed!");
-      $("#rate").addClass("border-red");
-      $("#submit").css({ "pointer-events": "none", "cursor": "not-allowed", "color": "black", "background-color": "#ccc", "border": "solid 1px #888", "text-shadow": "1px 1px 1px #fff" });
-      $("#rate").removeClass("border-green");
-      rate = "";
     }
+    //else {
+    //   $(".rate-error").html("Integer is not Allowed!");
+    //   $("#rate").addClass("border-red");
+    //   $("#submit").css({ "pointer-events": "none", "cursor": "not-allowed", "color": "black", "background-color": "#ccc", "border": "solid 1px #888", "text-shadow": "1px 1px 1px #fff" });
+    //   $("#rate").removeClass("border-green");
+    //   rate = "";
+    // }
   })
   $("#type").on('focus change', function(){
       var type = $('#type').val();
       if (!$('#type')[0].value) {
-        $(".type-error").html("Rate is Required!");
+        $(".type-error").html("Unit is Required!");
         $("#type").addClass("border-red");
         $("#type").removeClass("border-green");
         } else {

@@ -1,6 +1,6 @@
 @extends('Admin.layouts.app')
 
-@section('title', 'Add GIP && GOP')
+@section('title', 'Add GIP')
 
 @section('content')
      <!-- Content Wrapper. Contains page content -->
@@ -8,11 +8,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add GIP && GOP
-        <small>Meter Your Add GIP && GOP</small>
+        Add GIP
+        <small>Meter Your Add GIP</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-file-text-o"></i> Add GIP && GOP</a></li>
+        <li><a href="#"><i class="fa fa-file-text-o"></i> Add GIP</a></li>
         <li class="active">Here</li>
       </ol>
     </section>
@@ -54,7 +54,7 @@
                                 Gate out Pass
                                 @endif
                             </td>
-                            <td>{{ $item->qty }}</td>
+                            <td>{{ $item->qty ."-". $item->unit }}</td>
                             <td>{{ $item->rate }}</td>
                             <td align="right">{{ $item->amount }}</td>
                         </tr>

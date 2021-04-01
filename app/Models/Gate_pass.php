@@ -19,6 +19,7 @@ class Gate_pass extends Model
         'qty',
         'rate',
         'amount',
+        'unit',
         'type',
         'node'
     ];

@@ -203,15 +203,15 @@ desired effect
               <li class="{{ Request::is('Customer-manage') ? 'active' : '' }}"><a href="{{ Route('Customer-manage') }}">Manage Customer & Party</a></li>
             </ul>
           </li>
-        <li class="{{ Request::is('Create-GIP-GOP') ? 'active' : '' }} treeview">
-          <a href="#"><i class="fa fa-file-text-o"></i> <span>GIP && GOP</span>
+        <li class="{{ Request::is('Create-GIP') ? 'active' : '' }} {{ Request::is('invoice-manage') ? 'active' : '' }} treeview">
+          <a href="#"><i class="fa fa-file-text-o"></i> <span>GIP & GOP</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ Request::is('Create-GIP-GOP') ? 'active' : '' }}"><a href="{{ Route('Create-GIP-GOP') }}">Add GIP && GOP</a></li>
-            <li><a href="#">Manage</a></li>
+            <li class="{{ Request::is('Create-GIP') ? 'active' : '' }}"><a href="{{ Route('Create-GIP') }}">Add GIP</a></li>
+            <li class="{{ Request::is('invoice-manage') ? 'active' : '' }}"><a href="{{ Route('invoice-manage') }}">Invoice Manage</a></li>
           </ul>
         </li>
       </ul>
